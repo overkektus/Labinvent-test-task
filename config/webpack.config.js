@@ -15,7 +15,10 @@ module.exports = {
   },
   module: {
     loaders: [
-      // Take all sass files, compile them, and bundle them in with our js bundle
+      {
+        test: /\.css$/,
+        loader: 'style-loader!css-loader',
+      },
       {
         test: /\.scss$/,
         loader:

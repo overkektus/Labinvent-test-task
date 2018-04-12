@@ -7,10 +7,6 @@ import NetSettings from '../UI/NetSettings/NetSettings';
 import Title from '../UI/Title/Title';
 
 class Ethernet extends Component {
-  shouldComponentUpdate() {
-    return true;
-  }
-
   render() {
     return(
       <Fragment>

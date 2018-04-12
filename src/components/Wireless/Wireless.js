@@ -16,8 +16,8 @@ class Wireless extends Component {
     this.refreshHandler = this.refreshHandler.bind(this);
   }
 
-  refreshHandler(e) {
-    e.preventDefault();
+  refreshHandler(event) {
+    event.preventDefault();
     this.props.onRefresh();
   }
 
@@ -34,54 +34,54 @@ class Wireless extends Component {
         <DropDown
           id="availableNet"
           label="Wireless Network Name:"
-          options={this.props.wireless.availableNetworks}
-          selected={this.props.wireless.selectedNetwork}
+          options={this.props.availableNetworks}
+          selected={this.props.selectedNetwork}
           refreshClick={this.refreshHandler}
-          disabled={!this.props.wireless.enableWifi}
+          disabled={!this.props.enableWifi}
           onSelect={this.props.onSelectNetwork}
         />
         <CheckBox
           id="enableSec"
           label="Enable Wireless Security:"
           clicked={this.props.onEnableSecurity}
-          val={this.props.wireless.enableSecurity}
-          disabled={!this.props.wireless.enableWifi}
+          val={this.props.enableSecurity}
+          disabled={!this.props.enableWifi}
         />
         <TextBox
           secKey
           id="secKey"
           label="Security Key:"
-          val={this.props.wireless.securityKey}
-          disabled={!this.props.wireless.enableSecurity || !this.props.wireless.enableWifi}
+          val={this.props.securityKey}
+          disabled={!this.props.enableSecurity || !this.props.enableWifi}
           onChange={this.props.onChangeSecKey}
           require
         />
         <NetSettings
           wireless
           dhcpRadioID="wirelessDhcp"
-          ipAuto={this.props.wireless.netSettings.ipAuto}
+          ipAuto={this.props.ipAuto}
           toggleDHCP={this.props.onToggleDHCP}
           ipAddrID="wirelessIP"
-          ipAddrVal={this.props.wireless.netSettings.ip.addr}
+          ipAddrVal={this.props.ipAddr}
           onChangeIP={this.props.onChangeIP}
           maskID="wirelessMask"
-          maskVal={this.props.wireless.netSettings.ip.mask}
+          maskVal={this.props.mask}
           onChangeMask={this.props.onChangeMask}
           gateID="wirelessGate"
-          gateVal={this.props.wireless.netSettings.ip.gateway}
+          gateVal={this.props.gateway}
           onChangeGateway={this.props.onChangeGateway}
 
           dnsRadioID="wirelessDns"
-          dnsAuto={this.props.wireless.netSettings.dnsAuto}
+          dnsAuto={this.props.dnsAuto}
           toggleDNS={this.props.onToggleDNS}
           dnsAddrID="wirelessDnsAddr"
-          dnsAddrVal={this.props.wireless.netSettings.dns.addr}
+          dnsAddrVal={this.props.dnsAddr}
           onChangeDNSip={this.props.onChangeDNSip}
           dnsAltID="wirelessDnsAlt"
-          dnsAltVal={this.props.wireless.netSettings.dns.alt}
+          dnsAltVal={this.props.dnsAlt}
           onChangeAltDNSip={this.props.onChangeAltDNSip}
 
-          disabled={!this.props.wireless.enableWifi}
+          disabled={!this.props.enableWifi}
         />
       </Fragment>
     );
@@ -90,7 +90,20 @@ class Wireless extends Component {
 
 const mapStateToProps = state => {
   return {
-    wireless: state.wireless
+    wireless: state.wireless,
+    availableNetworks: state.wireless.availableNetworks,
+    selectedNetwork: state.wireless.selectedNetwork,
+    enableWifi: state.wireless.enableWifi,
+    enableSecurity: state.wireless.enableSecurity,
+    enableWifi: state.wireless.enableWifi,
+    securityKey: state.wireless.securityKey,
+    ipAuto: state.wireless.netSettings.ipAuto,
+    ipAddr: state.wireless.netSettings.ip.addr,
+    mask: state.wireless.netSettings.ip.mask,
+    gateway: state.wireless.netSettings.ip.gateway,
+    dnsAuto: state.wireless.netSettings.dnsAuto,
+    dnsAddr: state.wireless.netSettings.dns.addr,
+    dnsAlt: state.wireless.netSettings.dns.alt
   };
 };
 
@@ -110,15 +123,5 @@ const mapDispatchToProps = dispatch => {
     onChangeAltDNSip: (value) => dispatch(actionCreators.changeAltDNSip('wireless', value))
   }
 };
-
-// const mapDispatchToprops = dispatch => {
-//   return {
-//     onEnableWifi: (value) => dispatch({type: actionTypes.TOGGLE_WIFI, payload: {value: value}}),
-//     onEnableSecurity: (value) => dispatch({type: actionTypes.TOGGLE_WIFI_SECURITY, payload: {value: value}}),
-//     onRefresh: () => dispatch({type: actionTypes.GET_AVAILABLE_NETWORKS}),
-//     onToggleDHCP: (value) => dispatch({type: actionTypes.TOGGLE_DHCP, payload: {value: value, type: 'wireless'}}),
-//     onToggleDNS: (value) => dispatch({type: actionTypes.TOGGLE_DNS, payload: {value: value, type: 'wireless'}})
-//   };
-// };
 
 export default connect(mapStateToProps, mapDispatchToProps)(Wireless);

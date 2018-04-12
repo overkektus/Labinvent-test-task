@@ -1,0 +1,29 @@
+.Button {
+  border-radius: 25px;
+  background: #1AA8EB;
+  color: white;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  width: 100px;
+  height: 30px;
+  transition: all 0.25s ease;
+}
+
+.Button:hover {
+  color: #1AA8EB;
+  background: white;
+  border: 1px solid #1AA8EB;
+}
+
+.Inverted {
+  background: white;
+  border: 1px solid #1AA8EB;
+  color: #1AA8EB;
+}
+
+.Inverted:hover {
+  color: white;
+  background: #1AA8EB;
+  border: 1px solid #1AA8EB;
+}

@@ -1,0 +1,23 @@
+.Refresh {
+  width: 32px;
+  height: 32px;
+  border: none;
+  cursor: pointer;
+  background: url('../../../img/refresh_icon.svg') no-repeat;
+  transition: 0.25s ease-out;
+  outline: none;
+  align-self: right;
+}
+
+.Refresh:hover {
+  transform: rotate(180deg);
+}
+
+.RefreshDisabled {
+  cursor: default;
+}
+
+.RefreshDisabled:hover,
+.RefreshDisabled:active {
+  transform: none;
+}
